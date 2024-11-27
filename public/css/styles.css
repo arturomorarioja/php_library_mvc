@@ -1,0 +1,12 @@
+/* Book card */
+article {
+    h3, h4 {
+        display: inline-block;        
+        margin: 0;
+    }
+    h4:before { content: '('; }
+    h4:after { content: ')'; }
+    h4+p {
+        margin-top: 0;
+    }
+}

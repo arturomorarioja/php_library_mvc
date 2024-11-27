@@ -1,3 +1,12 @@
+nav > ul {
+    padding-left: 0;
+    li {
+        display: inline-block;
+        margin-right: 1rem;
+        list-style-type: none;
+    }
+}
+
 /* Book card */
 article {
     h3, h4 {

@@ -42,7 +42,7 @@ class Error
 
         // The error information is prepared for either showing or logging
         if (\App\Config::SHOW_ERRORS) {            
-            View::render("Errors/$code.html", [
+            View::render("Errors/$code.php", [
                 'pageTitle' => 'Error',
                 'errorInfo' => $exceptionInfo
             ]);
@@ -51,7 +51,7 @@ class Error
             ini_set('error_log', $log);            
             error_log("$exceptionInfo<hr>");
 
-            View::render("Errors/$code.html", ['pageTitle' => 'Error']);
+            View::render("Errors/$code.php", ['pageTitle' => 'Error']);
         }
 
     }

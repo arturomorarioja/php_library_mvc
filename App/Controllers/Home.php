@@ -12,8 +12,13 @@ class Home extends \Core\Controller
     {
         View::render('Home/index.php', [
             'pageTitle' => 'Home',
-            'name'      => 'Arturo',
-            'colours'   => ['red', 'green', 'blue']
+            'school'    => 'KEA',
+            'concepts'  => [
+                'Routing', 
+                'Logging',
+                'Error management', 
+                'MVC'
+            ]
         ]);
     }
 }

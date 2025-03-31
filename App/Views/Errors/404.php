@@ -2,7 +2,9 @@
 <?php include dirname(__DIR__) . '../Base/nav.php'; ?>
     <main>
         <section>
-            <h2>Page not found</h2>
+            <header>
+                <h2>Page not found</h2>
+            </header>
             <p>Unfortunately, the page was not found.</p>
             <?=$errorInfo ?? '' ?>
         </section>

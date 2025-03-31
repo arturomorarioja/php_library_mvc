@@ -1,13 +1,13 @@
 <?php include dirname(__DIR__) . '../Base/header.php'; ?>
 <?php include dirname(__DIR__) . '../Base/nav.php'; ?>
     <main>
-        <p>Hello <?=htmlspecialchars($name); ?></p>
+        <p>Hello <?=htmlspecialchars($school); ?> students</p>
         <p>
-            This is the list of colours:
+            These are some of the concepts illustrated here:
         </p>
         <ul>
-            <?php foreach ($colours as $colour): ?>
-                <li><?=htmlspecialchars($colour); ?></li>
+            <?php foreach ($concepts as $concept): ?>
+                <li><?=htmlspecialchars($concept); ?></li>
             <?php endforeach; ?>
         </ul>
     </main>

@@ -11,13 +11,14 @@ class Home extends \Core\Controller
     public function indexAction(): void
     {
         View::render('Home/index.php', [
-            'pageTitle' => 'Home',
-            'school'    => 'KEA',
-            'concepts'  => [
-                'Routing', 
-                'Logging',
-                'Error management', 
-                'MVC'
+            'pageTitle'     => 'Home',
+            'library'       => 'KEA',
+            'futureLibrary' => 'EK',
+            'topics'        => [
+                'Literature', 
+                'History',
+                'Art', 
+                'Cultural Studies'
             ]
         ]);
     }

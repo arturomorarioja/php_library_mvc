@@ -1,5 +1,10 @@
 <?php include dirname(__DIR__) . '../Base/header.php'; ?>
 <?php include dirname(__DIR__) . '../Base/nav.php'; ?>
+    <nav>
+        <ul>
+            <li><a href="books/new">Add book</a></li>
+        </ul>
+    </nav>
     <main>
         <section>
             <header>

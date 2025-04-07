@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use \Core\View;
 use App\Models\Book;
+use App\Models\Author;
+use App\Models\Publisher;
 
 class Books extends \Core\Controller
 {
@@ -25,7 +27,14 @@ class Books extends \Core\Controller
      */
     public function newAction(): void
     {
-        echo 'Hello from the new action in the Books controller!';
+        $authors = Author::getAll();
+        $publishers = Publisher::getAll();
+
+        View::render('Books/new.php', [
+            'pageTitle'  => 'Add book',
+            'authors'    => $authors,
+            'publishers' => $publishers
+        ]);
     }
 
     /**

@@ -25,10 +25,10 @@ abstract class Model
                 
                 // Throw an exception when an error occurs
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                return $db;
             } catch (PDOException $e) {
                 throw new \Exception("Error <strong>{$e->getMessage()}</strong> in model " . get_called_class());
             }
         }
+        return $db;
     }
 }

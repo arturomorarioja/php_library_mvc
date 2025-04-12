@@ -28,6 +28,46 @@ class Author extends \Core\Model
         }
     }
 
+    private static function validate(string $firstName): array
+    {
+        $validationErrors = [];
+        if (empty($firstName)) {
+            $validationErrors[] = 'First name is mandatory';
+        }
+        return $validationErrors;
+    }
+
+    public static function create(array $columns): int|array
+    {
+        $firstName = trim($columns['first_name'] ?? '');
+        $lastName = trim($columns['last_name'] ?? '');
+
+        $validationErrors = self::validate($firstName);
+        if (!empty($validationErrors)) {
+            return $validationErrors;
+        }
+
+        try {
+            $db = static::getDB();
+
+            $sql = <<<'SQL'
+                INSERT INTO tauthor
+                    (cName, cSurname)
+                VALUES
+                    (:firstName, :lastName);
+            SQL;
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':firstName', $firstName);
+            $stmt->bindValue(':lastName', $lastName);
+            $stmt->execute();
+
+            return $stmt->rowCount() > 0;
+
+        } catch (PDOException $e) {
+            throw new \Exception("Error <strong>{$e->getMessage()}</strong> in model " . get_called_class());
+        }
+    }
+
     public static function delete(int $authorID): bool
     {        
         try {

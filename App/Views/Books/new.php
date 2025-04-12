@@ -2,7 +2,7 @@
 <?php include dirname(__DIR__) . '/Base/nav.php'; ?>
     <nav>
         <ul>
-            <li><a href="<?=\App\Config::BASE_URL ?>books">Back</a></li>
+            <li><a href="<?=\App\Config::BASE_URL ?>books" class="button">Back</a></li>
         </ul>
     </nav>
     <main>

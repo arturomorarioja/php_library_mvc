@@ -21,6 +21,40 @@ class Authors extends \Core\Controller
     }
 
     /**
+     * Show the add new page
+     */
+    public function newAction(): void
+    {
+        View::render('Authors/new.php', [
+            'pageTitle' => 'Add author',
+        ]);
+    }
+
+    /**
+     * Create a new author
+     */
+    public function createAction(): void
+    {
+        $result = Author::create($_POST);
+
+        // Error
+        if (gettype($result) === 'array') {
+            View::render('Authors/new.php', [
+                'pageTitle'        => 'Add author',
+                'validationErrors' => $result
+            ]);    
+        } else {
+            $authors = Author::getAll();
+
+            View::render('Authors/index.php', [
+                'pageTitle' => 'Authors',
+                'message'   => 'Author successfully created',
+                'authors'   => $authors
+            ]);    
+        }
+    }
+
+    /**
      * Delete an author
      */
     public function deleteAction(): void

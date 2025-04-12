@@ -1,10 +1,10 @@
 <?php include dirname(__DIR__) . '/Base/header.php'; ?>
 <?php include dirname(__DIR__) . '/Base/nav.php'; ?>
-    <!-- <nav>
+    <nav>
         <ul>
-            <li><a href="books/new" class="button">Add book</a></li>
+            <li><a href="authors/new" class="button">Add author</a></li>
         </ul>
-    </nav> -->
+    </nav>
     <main>
         <section>
             <header>

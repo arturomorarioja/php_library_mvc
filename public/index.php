@@ -51,6 +51,15 @@ $router->add('authors', [
     'controller' => 'Authors',
     'action'     => 'index'
 ]);
+$router->add('authors/new', [
+    'controller' => 'Authors',
+    'action'     => 'new'
+]);
+$router->add('authors/create', [
+    'controller' => 'Authors',
+    'action'     => 'create',
+    'method'     => 'POST'
+]);
 $router->add('authors/delete', [
     'controller' => 'Authors',
     'action'     => 'delete',

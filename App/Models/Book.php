@@ -84,4 +84,23 @@ class Book extends \Core\Model
             throw new \Exception("Error <strong>{$e->getMessage()}</strong> in model " . get_called_class());
         }
     }
+
+    public static function delete(int $bookID): true
+    {        
+        try {
+            $db = static::getDB();
+
+            $sql = <<<'SQL'
+                DELETE FROM tbook
+                WHERE nBookID = :bookID;
+            SQL;
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':bookID', $bookID);
+            $stmt->execute();
+
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            throw new \Exception("Error <strong>{$e->getMessage()}</strong> in model " . get_called_class());
+        }
+    }
 }

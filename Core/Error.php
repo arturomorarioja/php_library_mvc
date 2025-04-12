@@ -20,7 +20,7 @@ class Error
         }
     }
 
-    public static function exceptionHandler(\Exception $exception): void
+    public static function exceptionHandler(\Throwable $exception): void
     {
         // HTTP status code might be 404 Not found or 500 Internal server error
         $code = $exception->getCode();

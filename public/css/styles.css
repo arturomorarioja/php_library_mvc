@@ -1,5 +1,7 @@
 :root {
     --colorDefault: black;
+    --colorButtonBackground: lightgrey;
+    --colorButtonHover: grey;
     --colorError: red;
 }
 
@@ -38,4 +40,29 @@ article {
 
 .validation_error {
     color: var(--colorError);
+}
+
+article.book_card {
+    display: grid;
+    grid-template-areas: 
+        "button header"
+        "button info";
+    grid-template-columns: auto 1fr;
+    column-gap: 1rem;
+
+    header { grid-area: header; }
+    p {      grid-area: info; }
+    form {   grid-area: button; }
+}
+
+.button {
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    color: var(--colorDefault);
+    background-color: var(--colorButtonBackground);
+
+    &:hover {
+        text-decoration: none;
+        background-color: var(--colorButtonHover);
+    }
 }

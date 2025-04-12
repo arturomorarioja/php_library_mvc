@@ -43,6 +43,8 @@ class Books extends \Core\Controller
     public function createAction(): void
     {
         $result = Book::create($_POST);
+
+        // Error
         if (gettype($result) === 'array') {
             $authors = Author::getAll();
             $publishers = Publisher::getAll();
@@ -71,5 +73,24 @@ class Books extends \Core\Controller
     {
         echo 'Hello from the edit action in the Books controller!';
         echo '<p>Router parameters: <pre>' . htmlspecialchars(print_r($this->routeParams, true)). '</pre></p>';
+    }
+
+    /**
+     * Delete a book
+     */
+    public function deleteAction(): void
+    {        
+        if (!Book::delete($_POST['book_id'])) {
+            $message = 'There was an error while deleting the book';            
+        } else {
+            $message = 'Book successfully deleted';
+        }
+        
+        $books = Book::getAll();
+        View::render('Books/index.php', [
+            'pageTitle' => 'Books',
+            'message'   => $message,
+            'books'     => $books
+        ]);
     }
 }

@@ -27,20 +27,25 @@ set_exception_handler('Core\Error::exceptionHandler');
 $router = new Core\Router();
 $router->add('', [
     'controller' => 'Home',
-    'action' => 'index'
+    'action'     => 'index'
 ]);
 $router->add('books', [
     'controller' => 'Books',
-    'action' => 'index'
+    'action'     => 'index'
 ]);
 $router->add('books/new', [
     'controller' => 'Books',
-    'action' => 'new'
+    'action'     => 'new'
 ]);
 $router->add('books/create', [
     'controller' => 'Books',
-    'action' => 'create',
-    'method' => 'POST'
+    'action'     => 'create',
+    'method'     => 'POST'
+]);
+$router->add('books/delete', [
+    'controller' => 'Books',
+    'action'     => 'delete',
+    'method'     => 'POST'
 ]);
 
 $url = $_SERVER['QUERY_STRING'];

@@ -67,15 +67,6 @@ class Books extends \Core\Controller
     }
 
     /**
-     * Show the edit page
-     */
-    public function editAction(): void
-    {
-        echo 'Hello from the edit action in the Books controller!';
-        echo '<p>Router parameters: <pre>' . htmlspecialchars(print_r($this->routeParams, true)). '</pre></p>';
-    }
-
-    /**
      * Delete a book
      */
     public function deleteAction(): void

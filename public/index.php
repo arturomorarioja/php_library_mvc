@@ -47,6 +47,15 @@ $router->add('books/delete', [
     'action'     => 'delete',
     'method'     => 'POST'
 ]);
+$router->add('authors', [
+    'controller' => 'Authors',
+    'action'     => 'index'
+]);
+$router->add('authors/delete', [
+    'controller' => 'Authors',
+    'action'     => 'delete',
+    'method'     => 'POST'
+]);
 
 $url = $_SERVER['QUERY_STRING'];
 $method = $_SERVER['REQUEST_METHOD'];

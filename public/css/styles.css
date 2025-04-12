@@ -42,7 +42,7 @@ article {
     color: var(--colorError);
 }
 
-article.book_card {
+article.card {
     display: grid;
     grid-template-areas: 
         "button header"

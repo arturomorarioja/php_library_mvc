@@ -85,7 +85,7 @@ class Book extends \Core\Model
         }
     }
 
-    public static function delete(int $bookID): true
+    public static function delete(int $bookID): bool
     {        
         try {
             $db = static::getDB();

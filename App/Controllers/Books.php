@@ -38,6 +38,33 @@ class Books extends \Core\Controller
     }
 
     /**
+     * Create a new book
+     */
+    public function createAction(): void
+    {
+        $result = Book::create($_POST);
+        if (gettype($result) === 'array') {
+            $authors = Author::getAll();
+            $publishers = Publisher::getAll();
+
+            View::render('Books/new.php', [
+                'pageTitle'        => 'Add book',
+                'authors'          => $authors,
+                'publishers'       => $publishers,
+                'validationErrors' => $result
+            ]);
+        } else {            
+            $books = Book::getAll();
+
+            View::render('Books/index.php', [
+                'pageTitle' => 'Books',
+                'message'   => 'Book successfully created',
+                'books'     => $books
+            ]);
+        }
+    }
+
+    /**
      * Show the edit page
      */
     public function editAction(): void

@@ -1,5 +1,5 @@
-<?php include dirname(__DIR__) . '../Base/header.php'; ?>
-<?php include dirname(__DIR__) . '../Base/nav.php'; ?>
+<?php include dirname(__DIR__) . '/Base/header.php'; ?>
+<?php include dirname(__DIR__) . '/Base/nav.php'; ?>
     <nav>
         <ul>
             <li><a href="books/new">Add book</a></li>
@@ -10,6 +10,11 @@
             <header>
                 <h2>Books</h2>
             </header>
+            <?php if (isset($message)): ?>
+                <section class="message">
+                    <p><?=$message ?></p>
+                </section>
+            <?php endif; ?>
             <?php foreach ($books as $book): ?>
                 <article>
                     <header>
@@ -21,4 +26,4 @@
             <?php endforeach; ?>
         </section>
     </main>
-<?php include dirname(__DIR__) . '../Base/footer.php'; ?>
+<?php include dirname(__DIR__) . '/Base/footer.php'; ?>

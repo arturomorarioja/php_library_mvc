@@ -20,10 +20,13 @@ class Router
 
     public function add(string $route, array $params): void
     {
+        if (!isset($params['method'])) {
+            $params['method'] = 'GET';
+        }
         $this->routes[$route] = $params;
     }
 
-    public function match(string $url): bool
+    public function match(string $url, string $method): bool
     {
         // If the URL ends in an ID, it is extracted
         $parts = explode('/', $url);
@@ -35,8 +38,8 @@ class Router
             $id = 0;
         }
 
-        // The URL is searched in the routing table
-        if (array_key_exists($url, $this->routes)) {
+        // Not only the route, but also the HTTP method, must match
+        if (isset($this->routes[$url]) && $this->routes[$url]['method'] === $method) {
             $this->params = $this->routes[$url];
             if ($id !== 0) {
                 $this->params['id'] = $id;
@@ -50,11 +53,10 @@ class Router
      * Calls the controller corresponding to the URL it receives 
      * as a parameter to show the corresponding page
      */
-    public function dispatch(string $url): bool|string
+    public function dispatch(string $url, string $method): bool|string
     {
         $url = $this->removeQueryStringVariables($url);
-
-        if ($this->match($url)) {
+        if ($this->match($url, $method)) {
             $controller = $this->params['controller'];
             $controller = "App\Controllers\\$controller";
 

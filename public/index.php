@@ -37,9 +37,20 @@ $router->add('books/new', [
     'controller' => 'Books',
     'action' => 'new'
 ]);
+$router->add('books/create', [
+    'controller' => 'Books',
+    'action' => 'create',
+    'method' => 'POST'
+]);
 
 $url = $_SERVER['QUERY_STRING'];
-$dispatchStatus = $router->dispatch($url);
+$method = $_SERVER['REQUEST_METHOD'];
+
+// var_dump($url);
+// var_dump($method);
+// exit;
+
+$dispatchStatus = $router->dispatch($url, $method);
 if (gettype($dispatchStatus) === 'string') {
     \Core\Utils::show($dispatchStatus);
 }

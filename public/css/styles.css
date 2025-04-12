@@ -1,3 +1,8 @@
+:root {
+    --colorDefault: black;
+    --colorError: red;
+}
+
 nav > ul {
     padding-left: 0;
     li {
@@ -22,4 +27,15 @@ article {
     header+p {
         margin-top: 0;
     }
+}
+
+.message {
+    border: thin solid var(--colorDefault);
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    padding: 0 1rem;    
+}
+
+.validation_error {
+    color: var(--colorError);
 }

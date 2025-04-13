@@ -31,4 +31,35 @@ abstract class Model
         }
         return $db;
     }
+
+    /**
+     * For SELECTs, it returns the query results as an associative array.
+     * For INSERTs, it returns the new PK value.
+     * For DELETEs, it returns the number of rows affected.
+     */
+    protected static function execute(string $sql, array $params = []): array|int
+    {
+        $db = static::getDB();
+
+        if (empty($params)) {
+            $stmt = $db->query($sql);
+        } else {
+            $stmt = $db->prepare($sql);
+            foreach ($params as $key => $value) {
+                $stmt->bindValue(":{$key}", $value);
+            }
+            $stmt->execute();
+        }
+
+        switch (substr(ltrim($sql), 0, 6)) {
+            case 'SELECT':
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            case 'INSERT':
+                return $db->lastInsertId();
+            case 'DELETE':  
+                return $stmt->rowCount() > 0;
+            default:
+                return 0;
+        }
+    }
 }

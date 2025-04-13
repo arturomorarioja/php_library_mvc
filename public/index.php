@@ -2,6 +2,7 @@
 /**
  * Front controller
  */
+session_start();
 
 /**
  * Autoloader

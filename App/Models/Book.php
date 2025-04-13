@@ -10,8 +10,6 @@ class Book extends \Core\Model
     public static function getAll(): array
     {
         try {
-            $db = static::getDB();
-            
             $sql = <<<'SQL'
                 SELECT tbook.nBookID AS book_id, 
                     tbook.cTitle AS title, 
@@ -26,10 +24,8 @@ class Book extends \Core\Model
                         ON tbook.nPublishingCompanyID = tpublishingcompany.nPublishingCompanyID
                 ORDER BY tbook.cTitle;
             SQL;
-            $stmt = $db->query($sql);
-            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            return $results;
+            return self::execute($sql);
         } catch (PDOException $e) {
             throw new \Exception("Error <strong>{$e->getMessage()}</strong> in model " . get_called_class());
         }
@@ -63,22 +59,19 @@ class Book extends \Core\Model
         }
 
         try {
-            $db = static::getDB();
-
             $sql = <<<'SQL'
                 INSERT INTO tbook
                     (cTitle, nAuthorID, nPublishingYear, nPublishingCompanyID)
                 VALUES
                     (:title, :authorID, :publishingYear, :publisherID)
             SQL;
-            $stmt = $db->prepare($sql);
-            $stmt->bindValue(':title', $title);
-            $stmt->bindValue(':authorID', $authorID);
-            $stmt->bindValue(':publishingYear', $publishingYear);
-            $stmt->bindValue(':publisherID', $publisherID);
-            $stmt->execute();
 
-            return $db->lastInsertId();
+            return self::execute($sql, [
+                'title'          => $title,
+                'authorID'       => $authorID,
+                'publishingYear' => $publishingYear,
+                'publisherID'    => $publisherID
+            ]);
 
         } catch (PDOException $e) {
             throw new \Exception("Error <strong>{$e->getMessage()}</strong> in model " . get_called_class());
@@ -88,17 +81,15 @@ class Book extends \Core\Model
     public static function delete(int $bookID): bool
     {        
         try {
-            $db = static::getDB();
-
             $sql = <<<'SQL'
                 DELETE FROM tbook
                 WHERE nBookID = :bookID;
             SQL;
-            $stmt = $db->prepare($sql);
-            $stmt->bindValue(':bookID', $bookID);
-            $stmt->execute();
 
-            return $stmt->rowCount() > 0;
+            return self::execute($sql, [
+                'bookID' => $bookID
+            ]) > 0;
+
         } catch (PDOException $e) {
             throw new \Exception("Error <strong>{$e->getMessage()}</strong> in model " . get_called_class());
         }

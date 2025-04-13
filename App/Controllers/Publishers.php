@@ -44,13 +44,8 @@ class Publishers extends \Core\Controller
                 'validationErrors' => $result
             ]);    
         } else {
-            $publishers = Publisher::getAll();
-
-            View::render('Publishers/index.php', [
-                'pageTitle'  => 'Publishers',
-                'message'    => 'Publisher successfully created',
-                'publishers' => $publishers
-            ]);    
+            $_SESSION['message'] = 'Publisher successfully created';
+            header('Location: ' . \App\Config::BASE_URL . 'publishers');
         }
     }
 
@@ -60,16 +55,10 @@ class Publishers extends \Core\Controller
     public function deleteAction(): void
     {        
         if (!Publisher::delete($_POST['publisher_id'])) {
-            $message = 'There was an error while deleting the publisher';            
+            $_SESSION['message'] = 'There was an error while deleting the publisher';            
         } else {
-            $message = 'Publisher successfully deleted';
+            $_SESSION['message'] = 'Publisher successfully deleted';
         }
-        
-        $publishers = Publisher::getAll();
-        View::render('Publishers/index.php', [
-            'pageTitle'  => 'Publishers',
-            'message'    => $message,
-            'publishers' => $publishers
-        ]);
+        header('Location: ' . \App\Config::BASE_URL . 'publishers');        
     }
 }

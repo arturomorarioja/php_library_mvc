@@ -10,18 +10,14 @@ class Publisher extends \Core\Model
     public static function getAll(): array
     {
         try {
-            $db = static::getDB();
-            
             $sql = <<<'SQL'
                 SELECT nPublishingCompanyID AS publisher_id,
                     cName AS name
                 FROM tpublishingcompany
                 ORDER BY cName;
             SQL;
-            $stmt = $db->query($sql);
-            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            return $results;
+            return self::execute($sql);
         } catch (PDOException $e) {
             throw new \Exception("Error <strong>{$e->getMessage()}</strong> in model " . get_called_class());
         }
@@ -46,19 +42,16 @@ class Publisher extends \Core\Model
         }
 
         try {
-            $db = static::getDB();
-
             $sql = <<<'SQL'
                 INSERT INTO tpublishingcompany
                     (cName)
                 VALUES
                     (:name);
             SQL;
-            $stmt = $db->prepare($sql);
-            $stmt->bindValue(':name', $name);
-            $stmt->execute();
 
-            return $stmt->rowCount() > 0;
+            return self::execute($sql, [
+                'name' => $name
+            ]);
 
         } catch (PDOException $e) {
             throw new \Exception("Error <strong>{$e->getMessage()}</strong> in model " . get_called_class());
@@ -68,17 +61,14 @@ class Publisher extends \Core\Model
     public static function delete(int $publisherID): bool
     {        
         try {
-            $db = static::getDB();
-
             $sql = <<<'SQL'
                 DELETE FROM tpublishingcompany
                 WHERE nPublishingCompanyID = :publisherID;
             SQL;
-            $stmt = $db->prepare($sql);
-            $stmt->bindValue(':publisherID', $publisherID);
-            $stmt->execute();
 
-            return $stmt->rowCount() > 0;
+            return self::execute($sql, [
+                'publisherID' => $publisherID
+            ]) > 0;
         } catch (PDOException $e) {
             throw new \Exception("Error <strong>{$e->getMessage()}</strong> in model " . get_called_class());
         }

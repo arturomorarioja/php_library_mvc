@@ -44,13 +44,8 @@ class Authors extends \Core\Controller
                 'validationErrors' => $result
             ]);    
         } else {
-            $authors = Author::getAll();
-
-            View::render('Authors/index.php', [
-                'pageTitle' => 'Authors',
-                'message'   => 'Author successfully created',
-                'authors'   => $authors
-            ]);    
+            $_SESSION['message'] = 'Author successfully created';
+            header('Location: ' . \App\Config::BASE_URL . 'authors');
         }
     }
 
@@ -60,16 +55,10 @@ class Authors extends \Core\Controller
     public function deleteAction(): void
     {        
         if (!Author::delete($_POST['author_id'])) {
-            $message = 'There was an error while deleting the author';            
+            $_SESSION['message'] = 'There was an error while deleting the author';            
         } else {
-            $message = 'Author successfully deleted';
-        }
-        
-        $authors = Author::getAll();
-        View::render('Authors/index.php', [
-            'pageTitle' => 'Authors',
-            'message'   => $message,
-            'authors'   => $authors
-        ]);
+            $_SESSION['message'] = 'Author successfully deleted';
+        }        
+        header('Location: ' . \App\Config::BASE_URL . 'authors');
     }
 }

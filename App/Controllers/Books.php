@@ -56,13 +56,8 @@ class Books extends \Core\Controller
                 'validationErrors' => $result
             ]);
         } else {            
-            $books = Book::getAll();
-
-            View::render('Books/index.php', [
-                'pageTitle' => 'Books',
-                'message'   => 'Book successfully created',
-                'books'     => $books
-            ]);
+            $_SESSION['message'] = 'Book successfully created';
+            header('Location: ' . \App\Config::BASE_URL . 'books');
         }
     }
 
@@ -72,16 +67,10 @@ class Books extends \Core\Controller
     public function deleteAction(): void
     {        
         if (!Book::delete($_POST['book_id'])) {
-            $message = 'There was an error while deleting the book';            
+            $_SESSION['message'] = 'There was an error while deleting the book';            
         } else {
-            $message = 'Book successfully deleted';
+            $_SESSION['message'] = 'Book successfully deleted';
         }
-        
-        $books = Book::getAll();
-        View::render('Books/index.php', [
-            'pageTitle' => 'Books',
-            'message'   => $message,
-            'books'     => $books
-        ]);
+        header('Location: ' . \App\Config::BASE_URL . 'books');
     }
 }

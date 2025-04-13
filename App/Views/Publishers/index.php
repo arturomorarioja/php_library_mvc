@@ -10,9 +10,10 @@
             <header>
                 <h2>Publisher list</h2>
             </header>
-            <?php if (isset($message)): ?>
+            <?php if (isset($_SESSION['message'])): ?>
                 <section class="message">
-                    <p><?=$message ?></p>
+                    <p><?=$_SESSION['message'] ?></p>
+                    <?php unset($_SESSION['message']); ?>
                 </section>
             <?php endif; ?>
             <?php foreach ($publishers as $publisher): ?>
